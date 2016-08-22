@@ -1,0 +1,35 @@
+<ion-view view-title="City360">
+  <ion-content class="background">
+    <ion-list>
+      <h3 class="padding" style="padding-left: 25px; padding-top: 15px">All locations</h3>
+      <ion-item class="item" ng-repeat="location in locations" type="item-text-wrap">
+        <div class="row">
+          <div class="col col-50">
+            <b>{{location.location}}</b>
+            <p>{{location.city}}</p>
+          </div>
+          <div class="col">
+            <center>
+              <img ng-src="img/humidity.png" width="50%" height="50%">
+              <h4>{{location.humidity}}%</h4>
+            </center>
+          </div>
+          <div class="col">
+            <center>
+              <img ng-src="img/temp.png" width="50%" height="50%">
+              <h4>{{location.temp}}°C</h4>
+            </center>
+          </div>
+          <div class="col">
+            <center>
+              <img ng-src="img/pressure.png" width="50%" height="50%">
+              <h4>{{location.pressure}}mb</h4>
+            </center>
+          </div>
+        </div>
+
+        
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,8 @@
+/* Empty. Add your own CSS if you like */
+.background.scroll-content{ 
+background: url('../img/bg.png') no-repeat; 
+background-size: cover; 
+background-position: center; 
+margin: auto; 
+z-index: 2; 
+}
