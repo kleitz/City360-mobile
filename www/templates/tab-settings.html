@@ -4,16 +4,28 @@
     	<div class="item item-divider">
 			Settings
 		</div>
-    	<a class="item item-icon-left" ng-click="changeFavLocation()">
-		    <i class="icon ion-android-star"></i>
+    	<a class="item" ng-click="changeFavLocation()">
 		    Favourite Location
 		    <span class="badge badge-calm">{{favLocation.name}}</span>
-		  </a>
+		</a>
+		<div class="item item-divider">
+			Version
+		</div>
+		<li class="item">
+	      <b>v1.0 (beta)</b>
+	    </li>
 		<div class="item item-divider">
 			About
 		</div>
     </ion-list>
 
-    <p class="padding">Created for Final Year Project in conjunction with Cyberview & Taylor's University</p>
+    <center>
+	    <p class="padding">City360 Final Year Project is created in association with:</p>
+	    <img src="img/taylorsuni.jpg" width="80%">
+	    <br><br>
+	    <b>Project Partner</b>
+	    <br><br>
+	    <img src="img/cyberview.png" width="60%">
+    </center>
   </ion-content>
 </ion-view>
