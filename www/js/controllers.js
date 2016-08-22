@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('SelectFavLocationCtrl', function($scope, $state) {
+.controller('SelectFavLocationCtrl', function($scope, $state, $ionicViewService) {
 
   //when a location is selected
   $scope.select = function (id){
@@ -40,6 +40,13 @@ angular.module('starter.controllers', [])
     //store fav location id upon selection
     window.localStorage['favLocation'] = id;
     window.localStorage['favLocationName'] = "Cyber " + id;
+
+    //clear back history stack,
+    //prevent other page from coming back here upon back button press
+    $ionicViewService.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+    });
 
     //change screen to dashboard
     $state.go('tab.dash');

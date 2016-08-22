@@ -4,40 +4,45 @@
       <br>
       <h3>{{location.name}}</h3>
       <br><br><br>
-      <p style="font-size:100px; font-weight:100; color:#037AFF;">
+      <p style="font-size:100px; font-weight:100; color:#70cff9;">
         {{location.riskPercent}}%
       </p>
 
       <br><br>
-      <p style="font-size:18px; font-weight:200; padding-right:70px; padding-left:70px;">{{location.riskText}}</p>
+      <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px;">{{location.riskText}}</p>
       <br><br>
 
-      <div class="row padding item">
-        <div class="col">
-          <img ng-src="img/humidity.png" width="50%" height="50%">
-          <h3>{{location.humidity}}%</h3>
+      <ion-list>
+        <div class="row padding item" style="padding-top:20px; padding-bottom:20px;">
+          <div class="col">
+            <img ng-src="img/humidity.png" width="50%" height="50%">
+            <h3>{{location.humidity}}%</h3>
+          </div>
+          <div class="col">
+            <img ng-src="img/temp.png" width="50%" height="50%">
+            <h3>{{location.temp}}°C</h3>
+          </div>
+          <div class="col">
+            <img ng-src="img/pressure.png" width="50%" height="50%">
+            <h3>{{location.pressure}}mb</h3>
+          </div>
         </div>
-        <div class="col">
-          <img ng-src="img/temp.png" width="50%" height="50%">
-          <h3>{{location.temp}}°C</h3>
-        </div>
-        <div class="col">
-          <img ng-src="img/pressure.png" width="50%" height="50%">
-          <h3>{{location.pressure}}mb</h3>
-        </div>
-      </div>
 
-      <br><br>
+        <div class="item item-divider row" style="padding-right:40px; padding-left:40px; padding-top: 10px; padding-bottom: 10px;">
+          <div class="col text-left">
+            <p style="font-size: 14px;">LAST UPDATED</a>
+          </div>
+          <div class="col text-right">
+            <p style="font-size: 14px;">
+            {{location.lastUpdatedTime}},
+            {{location.lastUpdatedDate}}
+            </p>
+          </div>
+        </div>
 
-      <div class="row" style="padding-right:40px; padding-left:40px;">
-        <div class="col text-left">
-          <b>LAST UPDATED</b>
-        </div>
-        <div class="col text-right">
-          {{location.lastUpdatedTime}},
-          {{location.lastUpdatedDate}}
-        </div>
-      </div>
+      </ion-list>
+
+      <br>
 
     </center>
     
