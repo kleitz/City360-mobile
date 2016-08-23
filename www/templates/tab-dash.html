@@ -1,18 +1,26 @@
 <ion-view view-title="City360">
   <ion-content class="padding background" scroll="false">
     <center>
-      <br>
-      <h3>{{location.name}}</h3>
-      <br><br><br>
-      <p style="font-size:100px; font-weight:100; color:#70cff9;">
-        {{location.riskPercent}}%
-      </p>
+      <div class="fadeMe animated fadeOutLeft">
+        <img ng-src="img/clouds.png">
+      </div>
+      <div class="animated fadeInLeft">
+        <br>
 
-      <br><br>
-      <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px;">{{location.riskText}}</p>
-      <br><br>
+        <h3 style="color:white;">{{location.name}}</h3>
+        
+        <br><br><br>
+        <!-- old color - color:#70cff9; -->
+        <p style="font-size:100px; font-weight:100; color:#ffffff;">
+          {{location.riskPercent}}%
+        </p>
 
-      <ion-list>
+        <br><br>
+        <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px; color:#ffffff;">{{location.riskText}}</p>
+        <br><br>
+      </div>
+
+      <div class="list card animated fadeInLeft">
         <div class="row padding item" style="padding-top:20px; padding-bottom:20px;">
           <div class="col">
             <img ng-src="img/humidity.png" width="50%" height="50%">
@@ -40,7 +48,7 @@
           </div>
         </div>
 
-      </ion-list>
+      </div>
 
       <br>
 

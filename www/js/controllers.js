@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {
-  $scope.location = {name:"Cyber 11, Cyberjaya",
+  $scope.location = {name:"CYBER 11, CYBERJAYA",
                       riskPercent:68,
                       riskText:"Moderate risk of mosquito breeding",
                       humidity:60,
@@ -53,11 +53,18 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('SettingsCtrl', function($scope, $state) {
+.controller('SettingsCtrl', function($scope, $state, $window, $ionicHistory) {
   $scope.favLocation = {id: window.localStorage['favLocation'],
                         name: window.localStorage['favLocationName']};
 
   $scope.changeFavLocation = function (){
     $state.go('selectfavlocation');
+  };
+
+  $scope.clearData = function (){
+    $window.localStorage.clear();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
+    $state.go('intro');
   };
 });
