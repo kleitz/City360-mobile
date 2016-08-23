@@ -1593,7 +1593,7 @@
   }
 
   to {
-    opacity: 0;
+    opacity: 0.2;
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
   }
@@ -1605,7 +1605,7 @@
   }
 
   to {
-    opacity: 0;
+    opacity: 0.2;
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
   }
@@ -1614,6 +1614,8 @@
 .fadeOutLeft {
   -webkit-animation-name: fadeOutLeft;
   animation-name: fadeOutLeft;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
 }
 
 @-webkit-keyframes fadeOutLeftBig {
