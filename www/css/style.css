@@ -15,6 +15,7 @@ div.fadeMe {
   top:        0; 
   left:       0; 
   position:   fixed; 
+  z-index: 0;
 }
 
 .location-item.ng-enter {
