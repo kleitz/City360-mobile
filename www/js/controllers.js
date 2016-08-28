@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('GetLocationCtrl', function($scope, $cordovaGeolocation, $state) {
+.controller('GetLocationCtrl', function($scope, $cordovaGeolocation, $state, $ionicViewService) {
 
   $scope.lat = null;
   $scope.long = null;
@@ -57,17 +57,17 @@ angular.module('starter.controllers', [])
   });
 
   $scope.continueToDash = function (){
+    //temporary - assign location into localStorage
+    //store fav location id upon selection
+    window.localStorage['favLocation'] = 11;
+    window.localStorage['favLocationName'] = "Cyber " + 11;
+
     //clear back history stack,
     //prevent other page from coming back here upon back button press
     $ionicViewService.nextViewOptions({
         disableAnimate: true,
         disableBack: true
     });
-
-    //temporary - assign location into localStorage
-    //store fav location id upon selection
-    window.localStorage['favLocation'] = 11;
-    window.localStorage['favLocationName'] = "Cyber " + 11;
 
     //continue to select fav location screen
     $state.go('tab.dash');
