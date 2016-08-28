@@ -1614,8 +1614,8 @@
 .fadeOutLeft {
   -webkit-animation-name: fadeOutLeft;
   animation-name: fadeOutLeft;
-  -webkit-animation-duration: 5s;
-  animation-duration: 5s;
+  -webkit-animation-duration: 15s;
+  animation-duration: 15s;
 }
 
 @-webkit-keyframes fadeOutLeftBig {

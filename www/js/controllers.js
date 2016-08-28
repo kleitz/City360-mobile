@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, $ionicPlatform) {
   $scope.location = {name:"CYBER 11, CYBERJAYA",
                       riskPercent:68,
                       riskText:"Moderate risk of mosquito breeding",
@@ -9,6 +9,9 @@ angular.module('starter.controllers', [])
                       pressure:980,
                       lastUpdatedTime:"9:40AM",
                       lastUpdatedDate:"JUNE 12"};
+
+  var audio = new Audio('audio/dash-wind.mp3');
+  audio.play();
 })
 
 .controller('AllLocationsCtrl', function($scope, Locations) {
@@ -24,9 +27,50 @@ angular.module('starter.controllers', [])
     $state.go('tab.dash');
   }
 
-  $scope.continue = function (){
+  //go to select location list
+  /*$scope.continue = function (){
     //continue to select fav location screen
     $state.go('selectfavlocation');
+  };*/
+
+  //go to get location screen
+  $scope.continue = function (){
+    //continue to select fav location screen
+    $state.go('getlocation');
+  };
+})
+
+.controller('GetLocationCtrl', function($scope, $cordovaGeolocation, $state) {
+
+  $scope.lat = null;
+  $scope.long = null;
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+  .getCurrentPosition(posOptions)
+  .then(function (position) {
+    $scope.lat  = position.coords.latitude
+    $scope.long = position.coords.longitude
+    console.log($scope.lat + '   ' + $scope.long + ' - location retrieved!')
+  }, function(err) {
+    console.log(err)
+  });
+
+  $scope.continueToDash = function (){
+    //clear back history stack,
+    //prevent other page from coming back here upon back button press
+    $ionicViewService.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true
+    });
+
+    //temporary - assign location into localStorage
+    //store fav location id upon selection
+    window.localStorage['favLocation'] = 11;
+    window.localStorage['favLocationName'] = "Cyber " + 11;
+
+    //continue to select fav location screen
+    $state.go('tab.dash');
   };
 })
 

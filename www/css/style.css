@@ -31,3 +31,10 @@ div.fadeMe {
   -webkit-animation-duration:0;
   animation-duration:0;
 }
+
+.spinner svg {
+  width: 50%;
+  height: 30%;
+  stroke: #444;
+  fill: #444;
+}

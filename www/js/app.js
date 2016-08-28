@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,6 +18,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+
 
     // Check for network connection
     if(window.Connection) {
@@ -53,6 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/selectfavlocation',
       templateUrl: 'templates/selectfavlocation.html',
       controller: 'SelectFavLocationCtrl'
+  }) 
+
+  .state('getlocation', {
+      url: '/getlocation',
+      templateUrl: 'templates/getlocation.html',
+      controller: 'GetLocationCtrl'
   }) 
 
   // setup an abstract state for the tabs directive
