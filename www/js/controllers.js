@@ -1,24 +1,5 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicPlatform) {
-  $scope.location = {name:"CYBER 11, CYBERJAYA",
-                      riskPercent:68,
-                      riskText:"Moderate risk of mosquito breeding",
-                      humidity:60,
-                      temp:32,
-                      pressure:980,
-                      lastUpdatedTime:"9:40AM",
-                      lastUpdatedDate:"JUNE 12"};
-
-  var audio = new Audio('audio/dash-wind.mp3');
-  audio.play();
-})
-
-.controller('AllLocationsCtrl', function($scope, Locations) {
-  //return all locations
-  $scope.locations = Locations.all();
-})
-
 .controller('IntroCtrl', function($scope, $state) {
 
   //if fav location has already been selected,
@@ -94,6 +75,32 @@ angular.module('starter.controllers', [])
 
     //change screen to dashboard
     $state.go('tab.dash');
+  };
+})
+
+.controller('DashCtrl', function($scope, $ionicPlatform) {
+  $scope.location = {name:"CYBER 11, CYBERJAYA",
+                      riskPercent:68,
+                      riskText:"Moderate risk of mosquito breeding",
+                      humidity:60,
+                      temp:32,
+                      pressure:980,
+                      lastUpdatedTime:"9:40AM",
+                      lastUpdatedDate:"JUNE 12"};
+
+  var audio = new Audio('audio/dash-loaded.wav');
+  audio.play();
+})
+
+.controller('AllLocationsCtrl', function($scope, Locations) {
+  //return all locations
+  $scope.locations = Locations.all();
+
+  console.log('no of locations: ' + $scope.locations.length);
+
+  $scope.playPresenceSound = function(){
+    var audio = new Audio('audio/plink.wav');
+    audio.play();
   };
 })
 
