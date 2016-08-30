@@ -96,6 +96,10 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, $http, $ionicPlatform) {
 
+  //flag for API call - success/fail
+  $scope.retrieveSuccess = false;
+
+  //initial data binding
   $scope.location = {name: window.localStorage['favLocationName'],
                       riskPercent:68,
                       riskText:"Moderate risk of mosquito breeding",
@@ -105,27 +109,40 @@ angular.module('starter.controllers', [])
                       lastUpdatedTime:"-",
                       lastUpdatedDate:"-"};
 
-  //get latest data for location from API
-  $http.get("https://infinite-dusk-89452.herokuapp.com/reports/device/" + window.localStorage['favLocation']).
-    then(function(resp) {
-      console.log(resp);
-      $scope.location.temp = resp.data[0].temperature;
-      $scope.location.humidity = resp.data[0].humidity;
-      $scope.location.pressure = resp.data[0].pressure;
-      //convert date string to date object
-      var date = new Date(resp.data[0].createdAt);
-      //extract data from date object
-      $scope.location.lastUpdatedTime = date.getHours() + '' + date.getMinutes();
-      $scope.location.lastUpdatedDate = date.getDate() + '/' + (date.getMonth()+1);
-    }, function(resp) {
-      console.log("Error retrieving data from closest device.");
-    });
+  var getData = function(){
+    //get latest data for location from API
+    $http.get("https://infinite-dusk-89452.herokuapp.com/reports/device/" + window.localStorage['favLocation']).
+      then(function(resp) {
+        console.log(resp);
+        $scope.location.temp = resp.data[0].temperature;
+        $scope.location.humidity = resp.data[0].humidity;
+        $scope.location.pressure = resp.data[0].pressure;
+        //convert date string to date object
+        var date = new Date(resp.data[0].createdAt);
+        //extract data from date object
+        $scope.location.lastUpdatedTime = date.getHours() + '' + ('0'+date.getMinutes()).slice(-2);
+        $scope.location.lastUpdatedDate = date.getDate() + '/' + (date.getMonth()+1);
 
-  var audio = new Audio('audio/dash-loaded.wav');
-  audio.play();
+        //update API call flag
+        $scope.retrieveSuccess = true;
+
+        //play audio effect
+        var audio = new Audio('audio/dash-loaded.wav');
+        audio.play();
+      }, function(resp) {
+        console.log("Error retrieving data from closest device.");
+      });
+  };
+
+  //retrieve data
+  getData();
+
+  $scope.refresh = function(){
+    getData();
+  };
 })
 
-.controller('AllLocationsCtrl', function($scope, Locations) {
+.controller('NearbyLocationsCtrl', function($scope, Locations) {
   //return all locations
   $scope.locations = Locations.all();
 

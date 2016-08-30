@@ -80,12 +80,12 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     }
   })
 
-  .state('tab.allLocations', {
-      url: '/allLocations',
+  .state('tab.nearbyLocations', {
+      url: '/nearbyLocations',
       views: {
-        'tab-allLocations': {
-          templateUrl: 'templates/tab-allLocations.html',
-          controller: 'AllLocationsCtrl'
+        'tab-nearbyLocations': {
+          templateUrl: 'templates/tab-nearbyLocations.html',
+          controller: 'NearbyLocationsCtrl'
         }
       }
     })

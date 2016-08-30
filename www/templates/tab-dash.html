@@ -1,8 +1,11 @@
 <ion-view view-title="City360">
+  <ion-nav-buttons side="right">
+    <button class="button icon ion-refresh" ng-click="refresh()"></button>
+  </ion-nav-buttons>
   <ion-content class="padding background" scroll="false">
     <center>
       <div class="fadeMe animated fadeOutLeft">
-        <img ng-src="img/clouds.png">
+        <img ng-show="retrieveSuccess" ng-src="img/clouds.png">
       </div>
       <div>
         <br>
@@ -22,15 +25,15 @@
 
       <div class="list card">
         <div class="row padding item" style="padding-top:20px; padding-bottom:20px;">
-          <div class="col animated bounceInDown">
+          <div class="col">
             <img ng-src="img/humidity.png" width="50%" height="50%">
             <h3>{{location.humidity}}%</h3>
           </div>
-          <div class="col animated bounceInDown">
+          <div class="col">
             <img ng-src="img/temp.png" width="50%" height="50%">
             <h3>{{location.temp}}°C</h3>
           </div>
-          <div class="col animated bounceInDown">
+          <div class="col">
             <img ng-src="img/pressure.png" width="50%" height="50%">
             <h3>{{location.pressure}}mb</h3>
           </div>
