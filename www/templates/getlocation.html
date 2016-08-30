@@ -17,11 +17,11 @@
       <h3>
         Location retrieved!
       </h3>
-      <p>Your closest station is ......</p>
+      <p ng-show="resp.data[0].name">Your closest station is {{resp.data[0].name}}</p>
     </div>
 
-    <button ng-show="lat" class="button button-block button-calm" ng-click="continueToDash()">
-      Set .... as favourite location
+    <button ng-show="resp.data[0].name" class="button button-block button-calm " ng-click="continueToDash()">
+      Continue
     </button>
 
   </ion-content>

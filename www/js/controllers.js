@@ -21,10 +21,24 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('GetLocationCtrl', function($scope, $cordovaGeolocation, $state, $ionicViewService) {
+.controller('GetLocationCtrl', function($scope, $http, $cordovaGeolocation, $state, $ionicViewService) {
 
   $scope.lat = null;
   $scope.long = null;
+  $scope.resp = null;
+
+  var retrieveClosestDevice = function(longitude, latitude){
+    $http.get("http://infinite-dusk-89452.herokuapp.com/devices/nearby/" + longitude + "/" + latitude).
+      then(function(response) {
+        $scope.resp = response;
+
+        window.localStorage['favLocation'] = $scope.resp.data[0]._id;
+        window.localStorage['favLocationName'] = $scope.resp.data[0].name;
+
+      }, function(response) {
+        console.log("Error retrieving closest device.");
+      });
+  }
 
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
   $cordovaGeolocation
@@ -33,15 +47,17 @@ angular.module('starter.controllers', [])
     $scope.lat  = position.coords.latitude
     $scope.long = position.coords.longitude
     console.log($scope.lat + '   ' + $scope.long + ' - location retrieved!')
+    retrieveClosestDevice($scope.long, $scope.lat);
   }, function(err) {
     console.log(err)
   });
 
   $scope.continueToDash = function (){
+
     //temporary - assign location into localStorage
     //store fav location id upon selection
-    window.localStorage['favLocation'] = 11;
-    window.localStorage['favLocationName'] = "Cyber " + 11;
+    window.localStorage['favLocation'] = $scope.resp.data[0]._id;
+    window.localStorage['favLocationName'] = $scope.resp.data[0].name;
 
     //clear back history stack,
     //prevent other page from coming back here upon back button press
@@ -78,15 +94,32 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('DashCtrl', function($scope, $ionicPlatform) {
-  $scope.location = {name:"CYBER 11, CYBERJAYA",
+.controller('DashCtrl', function($scope, $http, $ionicPlatform) {
+
+  $scope.location = {name: window.localStorage['favLocationName'],
                       riskPercent:68,
                       riskText:"Moderate risk of mosquito breeding",
-                      humidity:60,
-                      temp:32,
-                      pressure:980,
-                      lastUpdatedTime:"9:40AM",
-                      lastUpdatedDate:"JUNE 12"};
+                      humidity:0,
+                      temp:0,
+                      pressure:0,
+                      lastUpdatedTime:"-",
+                      lastUpdatedDate:"-"};
+
+  //get latest data for location from API
+  $http.get("https://infinite-dusk-89452.herokuapp.com/reports/device/" + window.localStorage['favLocation']).
+    then(function(resp) {
+      console.log(resp);
+      $scope.location.temp = resp.data[0].temperature;
+      $scope.location.humidity = resp.data[0].humidity;
+      $scope.location.pressure = resp.data[0].pressure;
+      //convert date string to date object
+      var date = new Date(resp.data[0].createdAt);
+      //extract data from date object
+      $scope.location.lastUpdatedTime = date.getHours() + '' + date.getMinutes();
+      $scope.location.lastUpdatedDate = date.getDate() + '/' + (date.getMonth()+1);
+    }, function(resp) {
+      console.log("Error retrieving data from closest device.");
+    });
 
   var audio = new Audio('audio/dash-loaded.wav');
   audio.play();

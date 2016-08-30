@@ -19,8 +19,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
       StatusBar.styleDefault();
     }
 
-
-
     // Check for network connection
     if(window.Connection) {
       if(navigator.connection.type == Connection.NONE) {
