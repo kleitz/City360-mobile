@@ -1,8 +1,9 @@
 <ion-view view-title="City360">
   <ion-nav-buttons side="right">
     <button class="button icon ion-refresh" ng-click="refresh()"></button>
+    <button class="button icon ion-android-exit" ng-click="clearData()"></button>
   </ion-nav-buttons>
-  <ion-content class="padding background" scroll="false">
+  <ion-content class="padding background grad" scroll="true">
     <center>
       <div class="fadeMe animated fadeOutLeft">
         <img ng-show="retrieveSuccess" ng-src="img/clouds.png">
@@ -10,7 +11,7 @@
       <div>
         <br>
 
-        <h3 style="color:white; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">{{location.name}}</h3>
+        <h2 style="color:white; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); text-transform: uppercase;">{{location.name}}</h2>
         
         <br><br><br>
         <!-- old color - color:#70cff9; -->
@@ -22,31 +23,29 @@
         <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">{{location.riskText}}</p>
         <br><br>
       </div>
-
+      <br>
       <div class="list card">
-        <div class="row padding item" style="padding-top:20px; padding-bottom:20px;">
+        <div class="row padding item" style="padding-top:20px; padding-bottom:10px;">
           <div class="col">
-            <img ng-src="img/humidity.png" width="50%" height="50%">
+            <img ng-src="img/humidity.png" width="40%" height="60%">
             <h3>{{location.humidity}}%</h3>
           </div>
           <div class="col">
-            <img ng-src="img/temp.png" width="50%" height="50%">
+            <img ng-src="img/temp.png" width="40%" height="60%">
             <h3>{{location.temp}}°C</h3>
           </div>
           <div class="col">
-            <img ng-src="img/pressure.png" width="50%" height="50%">
+            <img ng-src="img/pressure.png" width="40%" height="60%">
             <h3>{{location.pressure}}mb</h3>
           </div>
         </div>
 
         <div class="item item-divider row" style="padding-right:40px; padding-left:40px; padding-top: 10px; padding-bottom: 10px;">
           <div class="col text-left">
-            <p style="font-size: 14px;">LAST UPDATED</a>
+            <p style="font-size: 14px;"><i class="ion-ios-clock"></i> LAST UPDATED</a>
           </div>
           <div class="col text-right">
-            <p style="font-size: 14px;">
-            {{location.lastUpdatedTime}} HRS, {{location.lastUpdatedDate}}
-            </p>
+            <p style="font-size: 14px;">{{location.lastUpdatedTime}} HRS<!-- , {{location.lastUpdatedDate}} --></p>
           </div>
         </div>
 

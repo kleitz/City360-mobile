@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('DashCtrl', function($scope, $http, $ionicPlatform) {
+.controller('DashCtrl', function($scope, $http, $ionicPlatform, $window, $ionicHistory, $state) {
 
   //flag for API call - success/fail
   $scope.retrieveSuccess = false;
@@ -109,7 +109,7 @@ angular.module('starter.controllers', [])
                       lastUpdatedTime:"-",
                       lastUpdatedDate:"-"};
 
-  var getData = function(){
+  var getLatestReport = function(){
     //get latest data for location from API
     $http.get("https://infinite-dusk-89452.herokuapp.com/reports/device/" + window.localStorage['favLocation']).
       then(function(resp) {
@@ -134,11 +134,47 @@ angular.module('starter.controllers', [])
       });
   };
 
-  //retrieve data
-  getData();
+  // $scope.chart = {data:[],
+  //                     options: {
+  //                     width: 200,
+  //                     stroke: "#eee"
+  //                   }};
+
+  // var getLatestReportsLimited = function(){
+  //   //get latest data for location from API
+  //   $http.get("https://infinite-dusk-89452.herokuapp.com/reports/device/" + window.localStorage['favLocation'] + "/10").
+  //     then(function(resp) {
+  //       console.log(resp);
+
+  //       for(i=0; i<resp.data.length; i++){
+  //         //insert label (time)
+  //         //var date = new Date(resp.data[i].createdAt);
+  //         //$scope.barData.labels[i] = date.getHours() + '' + ('0'+date.getMinutes()).slice(-2);
+  //         //insert series (temp)
+  //         $scope.chart.data[i] = resp.data[i].humidity;
+  //       }
+
+  //     }, function(resp) {
+  //       console.log("Error retrieving reports from closest device.");
+  //     });
+  // };
+
+  //retrieve latest data for dashboard
+  getLatestReport();
+
+  //retrieve data for chart
+  //getLatestReportsLimited();
 
   $scope.refresh = function(){
-    getData();
+    getLatestReport();
+    getLatestReportsLimited();
+  };
+
+  $scope.clearData = function (){
+    $window.localStorage.clear();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
+    $state.go('intro');
   };
 })
 
