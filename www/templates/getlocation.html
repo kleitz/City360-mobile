@@ -1,28 +1,26 @@
 <ion-view view-title="City360">
   <ion-content class="padding">
 
-    <div ng-hide="lat" class="padding" style="padding-left: 25px; padding-top: 15px; font-weight:400;">
-      <h3>
-        Retrieving your location
-      </h3>
-      <p>City360 is now retrieving your location to find the closest station.</p>
-      <br><br>
+    <div ng-hide="lat" class="padding" style="padding-top: 15px; font-weight:400;">
+      <h3>Retrieving your location</h3>
+      <p>City360 is now using your location to locate the closest station</p>
+      <br>
+    
+      <center>
+        <ion-spinner icon="lines"></ion-spinner>
+        <br>
+        <h6>(Please ensure your location service is turned on)</h6>
+      </center>
     </div>
 
-    <center>
-      <ion-spinner ng-hide="lat" icon="lines"></ion-spinner>
-    </center>
-
-    <div ng-show="lat" class="padding" style="padding-left: 25px; padding-top: 15px; font-weight:400;">
-      <h3>
-        Location retrieved!
-      </h3>
-      <p ng-show="resp.data[0].name">Your closest station is {{resp.data[0].name}}</p>
+    <div ng-show="resp.data[0].name" class="padding">
+      <h3>Location retrieved</h3>
+      <p >Your closest station is <b>{{resp.data[0].name}}</b></p>
+      <br/>
+      <button class="button button-block button-calm " ng-click="continueToDash()">
+        Set as favourite location
+      </button>
     </div>
-
-    <button ng-show="resp.data[0].name" class="button button-block button-calm " ng-click="continueToDash()">
-      Continue
-    </button>
 
   </ion-content>
 </ion-view>

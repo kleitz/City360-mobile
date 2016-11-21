@@ -1,29 +1,34 @@
 <ion-view view-title="City360">
   <ion-content class="background grad">
     <ion-list>
-      <h3 class="padding" style="padding-left: 25px; padding-top: 15px; color:white;">Nearby locations</h3>
+      <h3 class="padding" style="padding-left: 15px; padding-top: 15px; color:white;">Nearby locations</h3>
+
+      <ion-item class="item" style="padding: 0px;">
+        <div id="map" style="width: 100%; height: 150px;" data-tap-disabled="true"></div>
+      </ion-item>
+
       <ion-item class="location-item item-remove-animate" ng-repeat="location in locations" type="item-text-wrap" after-show="playPresenceSound">
         <div class="row">
           <div class="col col-50">
-            <b>{{location.location}}</b>
-            <p>{{location.city}}</p>
+            <h3>{{location.name}}</h3>
+            <h5>Updated: {{location.latest_report.date | date:'shortTime'}}</h5>
           </div>
           <div class="col">
             <center>
-              <img ng-src="img/humidity.png" width="50%" height="50%">
-              <h4>{{location.humidity}}%</h4>
+              <img ng-src="img/humidity.png" width="20px" height="20px">
+              <h4>{{location.latest_report.humidity}}%</h4>
             </center>
           </div>
           <div class="col">
             <center>
-              <img ng-src="img/temp.png" width="50%" height="50%">
-              <h4>{{location.temp}}°C</h4>
+              <img ng-src="img/temp.png" width="20px" height="20px">
+              <h4>{{location.latest_report.temperature}}°C</h4>
             </center>
           </div>
           <div class="col">
             <center>
-              <img ng-src="img/pressure.png" width="50%" height="50%">
-              <h4>{{location.pressure}}mb</h4>
+              <img ng-src="img/pressure.png" width="20px" height="20px">
+              <h4>{{location.latest_report.pressure}}mb</h4>
             </center>
           </div>
         </div>
