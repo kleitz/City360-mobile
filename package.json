@@ -4,6 +4,7 @@
   "description": "city360: An Ionic project",
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-chart.js": "^1.0.3",
     "angular-chartist.js": "^4.2.1",
     "chartist": "^0.9.8",
     "gulp": "^3.5.6",

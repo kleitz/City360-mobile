@@ -1,4 +1,6 @@
-<ion-view view-title="City360">
+<ion-view cache-view="false" view-title="City360">
+  <ion-nav-bar class="bar-dark">
+  </ion-nav-bar>
   <ion-nav-buttons side="right">
     <button class="button icon ion-refresh" ng-click="refresh()"></button>
     <button class="button icon ion-android-exit" ng-click="clearData()"></button>
@@ -13,16 +15,31 @@
 
         <h2 style="color:white; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); text-transform: uppercase;">{{location.name}}</h2>
         
-        <br><br><br>
-        <!-- old color - color:#70cff9; -->
-        <p style="font-size:100px; font-weight:100; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">
-          {{location.riskPercent}}%
-        </p>
-
-        <br><br>
-        <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">{{location.riskText}}</p>
+        
+          <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+              <div>
+                <br><br><br>
+                <!-- old color - color:#70cff9; -->
+                <p style="font-size:100px; font-weight:100; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">
+                  {{location.mosquitoRisk | number: 0}}%
+                </p>
+                <br><br>
+                <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px; padding-bottom: 30px; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);">Risk of mosquito breeding</p>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div>
+                <br>
+                <i class="ion-ios-thunderstorm-outline" style="font-size: 140px; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); position: relative; top: -15px;" >
+                </i>
+                <p style="font-size:18px; font-weight:400; padding-right:70px; padding-left:70px; padding-bottom: 30px; color:#ffffff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); position: relative; top: -29px;">{{location.rainChance}}</p>
+              </div>
+            </ion-slide>
+          </ion-slide-box>
+        
       </div>
-      <br>
+
       <div class="list card">
         <div class="row padding item" style="padding-top:10px; padding-bottom:10px;">
           <div class="col">
@@ -42,6 +59,11 @@
           </div>
         </div>
 
+        <!-- <div class="item item-text-wrap">
+          <i class="icon ion-ios-rainy"></i>
+          {{location.rainChance}}
+        </div> -->
+
         <div class="item item-divider row" style="padding-right:40px; padding-left:40px; padding-top: 10px; padding-bottom: 10px;">
           <div class="col text-left">
             <p style="font-size: 14px;"><i class="ion-ios-clock"></i> LAST UPDATED</a>
@@ -50,14 +72,19 @@
             <p style="font-size: 14px;">{{location.lastUpdatedTime | date:'shortTime'}}<!-- , {{location.lastUpdatedDate}} --></p>
           </div>
         </div>
-
-        <div class="item row" style="padding: 0px;">
-          
-        </div>
-
       </div>
 
-      <br>
+      <div class="list card">
+        <div class="padding item item-text-wrap text-center">
+          <h4>Temperature vs Humidity (30 minutes)</h4>
+        </div>
+        <div class="row padding item">
+          <canvas style="padding-top: 10px;" id="base" class="chart-bar"
+            chart-data="data" chart-labels="labels" chart-colors="colors"
+            chart-dataset-override="datasetOverride">
+          </canvas>
+        </div>
+      </div>
 
     </center>
     
